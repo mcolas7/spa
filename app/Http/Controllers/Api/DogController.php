@@ -12,6 +12,6 @@ class DogController extends Controller
     public function index() {
         // return Dog::all();
 
-        return DogResource::collection(Dog::all());
+        return DogResource::collection(Dog::paginate(3));
     }
 }

@@ -16,8 +16,8 @@ class DogResource extends JsonResource
     {
         return [
             'dog_id' => $this->dog_id,
-            'sex_id' => $this->sex_id,
-            'size_id' => $this->size_id,
+            'sexName' => $this->sex->name, // $this->sex_id->name $this->sex->name
+            'sizeName' => $this->size->name,
             'name' => $this->name,
             'image' => $this->image,
             'breed' => $this->breed,

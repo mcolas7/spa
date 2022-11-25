@@ -1,12 +1,12 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-import CommentsIndex from './components/comments/index.vue';
-Vue.component('comments-index', CommentsIndex);
+import DogsIndex from './components/dogs/index.vue';
+import { Pagination } from 'laravel-vue-pagination';
 
-// window.Vue = require('vue').default;
+Vue.component('dogs-index', DogsIndex);
 
-// Vue.component('comments-index', require('./components/comments/index.vue')).default;
+Vue.component('pagination', Pagination);
 
 const app = new Vue({
     el: '#app'
