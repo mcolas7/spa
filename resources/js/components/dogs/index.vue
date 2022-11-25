@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 <tr v-for="dog in dogs.data" :key="dog.id">
-                    <td>{{ dog.image }}</td>
+                    <td><img class="img-fluid" :src="getDogImage"></td>
                     <td>{{ dog.name }}</td>
                     <td>{{ dog.sexName }}</td>
                     <td>{{ dog.sizeName }}</td>
@@ -35,7 +35,9 @@
 export default {
     data() {
         return {
-            dogs: {}
+            dogs: {
+                image:''
+            }
         }
     },
     mounted() {
@@ -49,7 +51,13 @@ export default {
                     .then(response => {
                             this.dogs = response.data;
                     });
+        },
+        getDogImage(){
+            let dog = this.dogs;
+            console.log(this.dog);
+            return dog;
         }
+
     }
 }
 </script>

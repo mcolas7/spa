@@ -2065,6 +2065,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2072,7 +2157,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      fields: {
+        'name': '',
+        'image': null,
+        'sex_id': '',
+        'size_id': '',
+        'breed': '',
+        'color': ''
+      },
+      errors: {},
+      form_submitting: false
+    };
+  },
+  methods: {
+    select_file: function select_file(event) {
+      this.fields.image = event.target.files[0];
+    },
+    submit_form: function submit_form() {
+      var _this = this;
+      this.form_submitting = true;
+      // pass image
+      var fields = new FormData();
+      for (var key in this.fields) {
+        fields.append(key, this.fields[key]);
+      }
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/dogs', fields).then(function (response) {
+        _this.$router.push('/');
+        _this.form_submitting = false;
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          _this.errors = error.response.data.errors;
+          _this.form_submitting = false;
+        }
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -2124,7 +2248,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      dogs: {}
+      dogs: {
+        image: ''
+      }
     };
   },
   mounted: function mounted() {
@@ -2138,6 +2264,11 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/dogs?page=' + page).then(function (response) {
         _this.dogs = response.data;
       });
+    },
+    getDogImage: function getDogImage() {
+      var dog = this.dogs;
+      console.log(this.dog);
+      return dog;
     }
   }
 });
@@ -20534,9 +20665,402 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    We will create a from to create later.\n")])
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "form",
+      {
+        staticClass: "needs-validation",
+        attrs: { action: "", novalidate: "", enctype: "multipart/form-data" },
+        on: {
+          submit: function ($event) {
+            $event.preventDefault()
+            return _vm.submit_form.apply(null, arguments)
+          },
+        },
+      },
+      [
+        _c("div", { staticClass: "row g-3" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("label", { staticClass: "form-label", attrs: { for: "name" } }, [
+              _vm._v("Name:"),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.fields.name,
+                  expression: "fields.name",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "name",
+                placeholder: "Write the name of the dog",
+                value: "",
+                maxlength: "50",
+                required: "",
+              },
+              domProps: { value: _vm.fields.name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.fields, "name", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    A valid name must be added.\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("Valid name!"),
+            ]),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.name
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errors.name[0]) +
+                      "\n                "
+                  ),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "file",
+                id: "image",
+                accept: ".jpg, .jpeg, .png",
+                required: "",
+              },
+              on: { change: _vm.select_file },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    A valid image must be added.\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("Valid image!"),
+            ]),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.image
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errors.image[0]) +
+                      "\n                "
+                  ),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6 mt-3" }, [
+            _c(
+              "label",
+              { staticClass: "form-label", attrs: { for: "sex_id" } },
+              [_vm._v("Sex:")]
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.sex_id,
+                    expression: "fields.sex_id",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { id: "sex_id", required: "" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.fields,
+                      "sex_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                },
+              },
+              [
+                _c("option", { attrs: { value: "", selected: "" } }, [
+                  _vm._v("Choose.."),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Male")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v("Female")]),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    A valid sex must be added.\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("Valid sex!"),
+            ]),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.sex
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errors.sex[0]) +
+                      "\n                "
+                  ),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6 mt-3" }, [
+            _c(
+              "label",
+              { staticClass: "form-label", attrs: { for: "size_id" } },
+              [_vm._v("Size:")]
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.size_id,
+                    expression: "fields.size_id",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { id: "size_id", required: "" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.fields,
+                      "size_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                },
+              },
+              [
+                _c("option", { attrs: { value: "", selected: "" } }, [
+                  _vm._v("Choose.."),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Small")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v("Medium")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [_vm._v("Large")]),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    A valid size must be added.\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("Valid size!"),
+            ]),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.size
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errors.size[0]) +
+                      "\n                "
+                  ),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6 mt-3" }, [
+            _c(
+              "label",
+              { staticClass: "form-label", attrs: { for: "breed" } },
+              [_vm._v("Breed:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.fields.breed,
+                  expression: "fields.breed",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "breed",
+                placeholder: "Write the breed of the dog",
+                value: "",
+                maxlength: "50",
+                required: "",
+              },
+              domProps: { value: _vm.fields.breed },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.fields, "breed", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    A valid breed must be added.\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("Valid breed!"),
+            ]),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.breed
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errors.breed[0]) +
+                      "\n                "
+                  ),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6 mt-3" }, [
+            _c(
+              "label",
+              { staticClass: "form-label", attrs: { for: "color" } },
+              [_vm._v("Colour:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.fields.color,
+                  expression: "fields.color",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "color",
+                placeholder: "Enter the colour of the dog",
+                value: "",
+                maxlength: "50",
+                required: "",
+              },
+              domProps: { value: _vm.fields.color },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.fields, "color", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    A valid colour must be added.\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("Valid colour!"),
+            ]),
+            _vm._v(" "),
+            _vm.errors && _vm.errors.color
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errors.color[0]) +
+                      "\n                "
+                  ),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-fluid mt-3 text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "w-50 btn btn-primary btn-lg",
+                attrs: {
+                  type: "submit",
+                  id: "submit",
+                  disabled: _vm.form_submitting,
+                  value: _vm.form_submitting
+                    ? "Saving comment..."
+                    : "Save comment",
+                },
+              },
+              [_vm._v("NEW DOG")]
+            ),
+          ]),
+        ]),
+      ]
+    ),
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label", attrs: { for: "image" } }, [
+      _vm._v("Image "),
+      _c("span", { staticClass: "text-muted" }, [_vm._v("(JPG, JPEG, PNG)")]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -20569,7 +21093,12 @@ var render = function () {
           "tbody",
           _vm._l(_vm.dogs.data, function (dog) {
             return _c("tr", { key: dog.id }, [
-              _c("td", [_vm._v(_vm._s(dog.image))]),
+              _c("td", [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: { src: _vm.getDogImage },
+                }),
+              ]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(dog.name))]),
               _vm._v(" "),
@@ -35909,6 +36438,18 @@ module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBun
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
