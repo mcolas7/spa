@@ -9,15 +9,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Nicola</td>
-                    <td>Akita</td>
-                    <td>Brown</td>
-                </tr>
-                <tr>
-                    <td>Nil</td>
-                    <td>Afghan Hound</td>
-                    <td>Black</td>
+                <tr v-for="dog in dogs">
+                    <td>{{ dog.name }}</td>
+                    <td>{{ dog.breed }}</td>
+                    <td>{{ dog.color }}</td>
                 </tr>
             </tbody>
         </table>
@@ -25,4 +20,16 @@
 </template>
 
 <script>
+export default {
+    data(){
+        return {
+            dogs: []
+        }
+    },
+    mounted(){
+        axios.get('/api/dogs').then(response => {
+            this.dogs = response.data;
+        });
+    }
+}
 </script>
