@@ -2096,7 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
     axios.get('/api/dogs').then(function (response) {
-      _this.dogs = response.data;
+      _this.dogs = response.data.data;
     });
   }
 });

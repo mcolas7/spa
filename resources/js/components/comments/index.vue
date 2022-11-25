@@ -28,7 +28,7 @@ export default {
     },
     mounted(){
         axios.get('/api/dogs').then(response => {
-            this.dogs = response.data;
+            this.dogs = response.data.data;
         });
     }
 }
