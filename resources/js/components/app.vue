@@ -1,14 +1,14 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
                 <div class="collapse navbar-collapse">
-                    <ul>
+                    <ul class="nav nav-tabs mr-auto">
                         <li class="nav-item">
-                            <router-link :to="{ name: 'dogs.index' }" class="nav-Link">Dogs List</router-link>
+                            <router-link active-class="active-menu" exact :to="{ name: 'dogs.index' }" class="nav-link lg">Dogs List</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'dogs.create' }" class="nav-Link">Create new dog</router-link>
+                            <router-link active-class="active-menu" exact :to="{ name: 'dogs.create' }" class="nav-link">Create new dog</router-link>
                         </li>
                     </ul>
                 </div>

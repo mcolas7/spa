@@ -20455,12 +20455,12 @@ var render = function () {
     _c(
       "nav",
       {
-        staticClass: "navbar navbar-expand-md navbar-light bg-white shadow-sm",
+        staticClass: "navbar navbar-expand-lg navbar-light bg-white shadow-sm",
       },
       [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "collapse navbar-collapse" }, [
-            _c("ul", [
+            _c("ul", { staticClass: "nav nav-tabs mr-auto" }, [
               _c(
                 "li",
                 { staticClass: "nav-item" },
@@ -20468,8 +20468,12 @@ var render = function () {
                   _c(
                     "router-link",
                     {
-                      staticClass: "nav-Link",
-                      attrs: { to: { name: "dogs.index" } },
+                      staticClass: "nav-link lg",
+                      attrs: {
+                        "active-class": "active-menu",
+                        exact: "",
+                        to: { name: "dogs.index" },
+                      },
                     },
                     [_vm._v("Dogs List")]
                   ),
@@ -20484,8 +20488,12 @@ var render = function () {
                   _c(
                     "router-link",
                     {
-                      staticClass: "nav-Link",
-                      attrs: { to: { name: "dogs.create" } },
+                      staticClass: "nav-link",
+                      attrs: {
+                        "active-class": "active-menu",
+                        exact: "",
+                        to: { name: "dogs.create" },
+                      },
                     },
                     [_vm._v("Create new dog")]
                   ),
