@@ -9,26 +9,7 @@
     </head>
     <body>
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                <div class="container">
-                    <div class="collapse navbar-collapse">
-                        <ul>
-                            <li class="nav-item">
-                                <a href="#" class="nav-Link">Dogs List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-Link">Add new Dog</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
-            <main class="py-4">
-                <div class="container">
-                    <dogs-index></dogs-index>
-                </div>
-            </main>
+            <app></app>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
     </body>
