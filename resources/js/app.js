@@ -1,13 +1,34 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-import CommentsIndex from './components/comments/index.vue';
-Vue.component('comments-index', CommentsIndex);
+import VueRouter from 'vue-router';
+import App from './components/app.vue';
+import DogsIndex from './components/dogs/index.vue';
+import DogsCreate from './components/dogs/create.vue';
 
-// window.Vue = require('vue').default;
+Vue.use(VueRouter);
 
-// Vue.component('comments-index', require('./components/comments/index.vue')).default;
+const router = new VueRouter({
+    mode: 'history',
+    routes: [ {
+        path: '/',
+        component: DogsIndex,
+        name: 'dogs.index'
+    }, {
+        path: '/dogs/create',
+        component: DogsCreate,
+        name: 'dogs.create'
+    }
+         
+    ]
+})
+
+// Vue.component('dogs-index', DogsIndex);
+
+Vue.component('pagination', require('laravel-vue-pagination'))
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: { App },
+    router
 });
