@@ -17,7 +17,7 @@ class CreateDogsTable extends Migration
             $table->id('dog_id');
             $table->unsignedBigInteger('sex_id');
             $table->unsignedBigInteger('size_id');
-            $table->string('name',20);
+            $table->string('name',50);
             $table->string('image',50);
             $table->string('breed',50);
             $table->string('color',50);
