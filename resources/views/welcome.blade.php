@@ -10,6 +10,10 @@
             .active-menu {
                 font-weight: bold;
             }
+
+            td {
+              text-align: center;
+            }
         </style>
     </head>
     <body>

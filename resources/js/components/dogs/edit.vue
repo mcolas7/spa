@@ -5,7 +5,7 @@
             <div class="row g-3">
                 <div class="col-sm-6">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" v-model="fields.name" placeholder="Write the name of the dog" value="" maxlength="20" required>
+                    <input type="text" class="form-control" id="name" v-model="fields.name" maxlength="20" required>
                     <div class="invalid-feedback">
                         A valid name must be added.
                     </div>
@@ -36,8 +36,8 @@
                         A valid sex must be added.
                     </div>
                     <div class="valid-feedback">Valid sex!</div>
-                    <div class="alert alert-danger" v-if="errors && errors.sex_id">
-                        The sex field is required.
+                    <div class="alert alert-danger" v-if="errors && errors.sex">
+                        {{ errors.sex[0] }}
                     </div>
                 </div>
                 <div class="form-group col-md-6 mt-3">
@@ -52,8 +52,8 @@
                         A valid size must be added.
                     </div>
                     <div class="valid-feedback">Valid size!</div>
-                    <div class="alert alert-danger" v-if="errors && errors.size_id">
-                        The size field is required.
+                    <div class="alert alert-danger" v-if="errors && errors.size">
+                        {{ errors.size[0] }}
                     </div>
                 </div>
                 <div class="col-sm-6 mt-3">
@@ -105,6 +105,13 @@ export default {
             form_submitting: false
         }
     },
+    mounted() {
+        axios.get('/api/dogs/'+this.$route.params.id)
+        .then(respose => {
+            this.fields = respose.data.data;
+
+        });
+    },
     methods: {
         select_file(event) {
             this.fields.image = event.target.files[0];
@@ -116,14 +123,14 @@ export default {
             for (let key in this.fields) {
                 fields.append(key, this.fields[key]);
             }
-            axios.post('/api/dogs', fields)
+            axios.put('/api/dogs/'+this.params.id, fields)
                 .then(response => {
-                    this.$swal({icon: 'success', title: 'Dog saved!'})
+                    this.$swal({icon: 'success', title: 'Dog updated!'})
                     this.$router.push('/');
                     this.form_submitting = false;
                 })
                 .catch(error => {
-                    this.$swal({icon: 'error', title: 'Error happened!'});
+                    this.$swal({icon: 'error', title: 'Error happened!'}); //Si no funciona posar dintre del if
                     if (error.response.status === 422) {
                         this.errors = error.response.data.errors;
                     }
