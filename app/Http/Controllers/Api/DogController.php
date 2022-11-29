@@ -18,27 +18,20 @@ class DogController extends Controller
 
         sleep(2);
 
-        // Emmagatzemo la imatge i l'autorització a la carpeta storage\app\public
-        $pathImage = $request->file('image')->store('images', 'public');
-        $imageRouter = explode('/', $pathImage);
-        $imageName = $imageRouter[1];
-
-        // $destinationPath = 'images';
-        // $myimage = $request->image->getClientOriginalName();
-        // $request->image->move(public_path($destinationPath), $myimage);
+        // Emmagatzemo la imatge
+        $pathImage = $request->file('image')->store('images', 'public'); 
 
         $dog = Dog::create([
             'sex_id' => $request->sex_id,
             'size_id' => $request->size_id,
             'name' => $request->name,
-            'image' => $pathImage, 
+            'image' => $pathImage,
             'breed' => $request->breed,
             'color' => $request->color,
             'adopted' => false
         ]);
 
         return new DogResource($dog);
-
 
 
     }

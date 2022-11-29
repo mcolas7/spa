@@ -2244,6 +2244,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2265,10 +2266,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.dogs = response.data;
       });
     },
-    getDogImage: function getDogImage() {
-      var dog = this.dogs;
-      console.log(this.dog);
-      return dog;
+    ourImage: function ourImage(img) {
+      return "/images/" + img;
     }
   }
 });
@@ -20700,7 +20699,7 @@ var render = function () {
                 id: "name",
                 placeholder: "Write the name of the dog",
                 value: "",
-                maxlength: "50",
+                maxlength: "20",
                 required: "",
               },
               domProps: { value: _vm.fields.name },
@@ -20975,7 +20974,7 @@ var render = function () {
             _c(
               "label",
               { staticClass: "form-label", attrs: { for: "color" } },
-              [_vm._v("Colour:")]
+              [_vm._v("Color:")]
             ),
             _vm._v(" "),
             _c("input", {
@@ -20991,7 +20990,7 @@ var render = function () {
               attrs: {
                 type: "text",
                 id: "color",
-                placeholder: "Enter the colour of the dog",
+                placeholder: "Enter the color of the dog",
                 value: "",
                 maxlength: "50",
                 required: "",
@@ -21085,39 +21084,52 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "table-responsive mt-2" },
     [
-      _c("table", { staticClass: "table" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.dogs.data, function (dog) {
-            return _c("tr", { key: dog.id }, [
-              _c("td", [
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: { src: _vm.getDogImage },
-                }),
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.sexName))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.sizeName))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.breed))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.color))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.adopted))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dog.created_at))]),
-            ])
-          }),
-          0
-        ),
-      ]),
+      _c(
+        "table",
+        {
+          staticClass:
+            "table table-bordered table-hover caption-top align-middle",
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.dogs.data, function (dog) {
+              return _vm.dogs.data.length > 0
+                ? _c("tr", { key: dog.id }, [
+                    _c("td", [
+                      _c("img", {
+                        staticClass: "img-fluid",
+                        staticStyle: { height: "60px" },
+                        attrs: { src: _vm.ourImage(dog.image) },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(dog.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(dog.sexName))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(dog.sizeName))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(dog.breed))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(dog.color))]),
+                    _vm._v(" "),
+                    dog.adopted === 1
+                      ? _c("td", [_vm._v(" Yes")])
+                      : _c("td", [_vm._v("No")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(dog.created_at))]),
+                  ])
+                : _vm._e()
+            }),
+            0
+          ),
+        ]
+      ),
       _vm._v(" "),
       _c("pagination", {
         attrs: { data: _vm.dogs },

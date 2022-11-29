@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <table class="table">
+    <div class="table-responsive mt-2">
+        <table class="table table-bordered table-hover caption-top align-middle">
             <thead>
                 <tr>
                     <td>Image</td>
@@ -14,14 +14,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="dog in dogs.data" :key="dog.id">
-                    <td><img class="img-fluid" :src="getDogImage"></td>
+                <tr v-for="dog in dogs.data" :key="dog.id" v-if="dogs.data.length > 0">
+                    <td><img class="img-fluid" :src="ourImage(dog.image)" style="height: 60px;"></td>
                     <td>{{ dog.name }}</td>
                     <td>{{ dog.sexName }}</td>
                     <td>{{ dog.sizeName }}</td>
                     <td>{{ dog.breed }}</td>
                     <td>{{ dog.color }}</td>
-                    <td>{{ dog.adopted }}</td>
+                    <td v-if="dog.adopted === 1"> Yes</td>
+                    <td v-else>No</td>
                     <td>{{ dog.created_at }}</td>
                 </tr>
             </tbody>
@@ -52,10 +53,8 @@ export default {
                             this.dogs = response.data;
                     });
         },
-        getDogImage(){
-            let dog = this.dogs;
-            console.log(this.dog);
-            return dog;
+        ourImage(img) {
+            return "/images/"+img;
         }
 
     }

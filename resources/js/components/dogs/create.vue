@@ -5,7 +5,7 @@
             <div class="row g-3">
                 <div class="col-sm-6">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" v-model="fields.name" placeholder="Write the name of the dog" value="" maxlength="50" required>
+                    <input type="text" class="form-control" id="name" v-model="fields.name" placeholder="Write the name of the dog" value="" maxlength="20" required>
                     <div class="invalid-feedback">
                         A valid name must be added.
                     </div>
@@ -68,8 +68,8 @@
                     </div>
                 </div>
                 <div class="col-sm-6 mt-3">
-                    <label for="color" class="form-label">Colour:</label>
-                    <input type="text" class="form-control" id="color" v-model="fields.color" placeholder="Enter the colour of the dog" value="" maxlength="50" required>
+                    <label for="color" class="form-label">Color:</label>
+                    <input type="text" class="form-control" id="color" v-model="fields.color" placeholder="Enter the color of the dog" value="" maxlength="50" required>
                     <div class="invalid-feedback">
                         A valid colour must be added.
                     </div>
